@@ -1,2 +1,2 @@
 # xeger-cpp
-The xeger library ported and optimized using c++
+The xeger library ported to and optimized using c++
