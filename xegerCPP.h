@@ -1,4 +1,6 @@
 #pragma once
+#include<string>
+#include<string_view>
 
 #ifdef _WIN32
 	#define EXPORT __declspec(dllexport)
@@ -6,11 +8,4 @@
 	#define EXPORT
 #endif
 
-#ifndef XEGERCPP_H
-#define XEGERCPP_H
-
-#include<string>
-
-EXPORT std::string xeger(std::string regexp);
-
-#endif
+EXPORT std::string xeger(std::string_view regexp);

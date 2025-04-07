@@ -1,5 +1,5 @@
 #include "xegerCPP.h"
 
-EXPORT std::string xeger(std::string regexp) {
-	return regexp;
+EXPORT std::string xeger(std::string_view regexp) {
+	return std::string(regexp);
 }
