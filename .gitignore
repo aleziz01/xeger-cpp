@@ -1,0 +1,7 @@
+# build testing
+/build
+/vcpkg
+/vcpkg_installed
+/.cache
+/.vs
+compile_commands.json
