@@ -5,6 +5,7 @@
 #include <re2/re2.h>
 #include <random>
 #include <set>
+#include <vector>
 
 #ifdef _WIN32
 	#define EXPORT __declspec(dllexport)
@@ -35,12 +36,13 @@ public:
         _alphabets["nonword"] = getNonWord();
         _alphabets["postalsafe"] = getAsciiLetters() + getDigits() + " .-#/";
         _alphabets["urlsafe"] = getAsciiLetters() + getDigits() + "-._~";
-        _alphabets["domainsafe"] = getAsciiLetters() + getDigits() + "-"; 
+        _alphabets["domainsafe"] = getAsciiLetters() + getDigits() + "-";
+
     }
 
     // Function to get printable characters
     std::string getPrintable() {
-        return " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; // Example of printable characters
+        return " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     }
 
     // Function to get ASCII letters
@@ -93,13 +95,25 @@ public:
         std::string nonword(nonword_set.begin(), nonword_set.end());
         return nonword;
     }
+    
+    std::string buildString(const std::vector<std::pair<int,std::string>> parsed) {
+        std::string newStr;
+        for (const auto& state : parsed) {
+            newStr += handleState(state);
+        }
+        return newStr;
+    }
 
-    // Other member functions can be added here
+    std::string handleState(const std::pair<int, string>& state) {
+        int opcode = state.first;
+        std::string value = state.second;
+        
+    }
 
 private:
     int _limit;
     std::unordered_map<std::string, std::string> _cache; // Using string for keys and values as an example
     std::mt19937 _random; // Mersenne Twister random number generator
     std::unordered_map<std::string, std::string> _alphabets;
-    std::unordered_map<std::string, std::string> _categories;
+    std::unordered_map<std::string, std::function<std::string(const std::string&)>> cases;
 };
